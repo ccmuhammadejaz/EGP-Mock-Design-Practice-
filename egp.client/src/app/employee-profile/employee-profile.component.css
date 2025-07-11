@@ -1,0 +1,660 @@
+/* Ensure proper image rendering */
+.employee-avatar {
+  width: 52px; /* Increased from 48px */
+  height: 52px; /* Increased from 48px */
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+  image-rendering: auto;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.placeholder-avatar {
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 1.3rem; /* Slightly increased */
+  border: 2px solid #e5e7eb;
+}
+
+/* Ensure SVG avatars scale properly */
+.employee-avatar[src*="data:image/svg"] {
+  image-rendering: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.employee-profile-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px; /* Increased from 16px */
+  margin: 2px;
+  width: 100%;
+  min-width: 420px; /* Increased from 380px */
+  max-width: 480px; /* Increased from 420px */
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+  .employee-profile-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+/* Header Section - Slightly expanded */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px; /* Increased from 16px */
+}
+
+.employee-info {
+  display: flex;
+  gap: 14px; /* Increased from 12px */
+  align-items: flex-start;
+}
+
+.avatar-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.status-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 18px; /* Increased from 16px */
+  height: 18px; /* Increased from 16px */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  font-size: 0.65rem; /* Slightly increased */
+}
+
+  .status-badge.probation {
+    background: #f59e0b;
+    color: white;
+  }
+
+  .status-badge.permanent {
+    background: #10b981;
+    color: white;
+  }
+
+.basic-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.employee-name {
+  font-size: 1.15rem; /* Increased from 1.1rem */
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0px; /* Slightly increased margin */
+  line-height: 1.3;
+}
+
+.job-title {
+  font-size: 0.9rem; /* Increased from 0.85rem */
+  color: #6b7280;
+  margin: 0px; /* Slightly increased margin */
+  font-weight: 500;
+}
+
+.joining-date {
+  display: flex;
+  align-items: center;
+  gap: 7px; /* Increased from 6px */
+  color: #6b7280;
+  font-size: 0.8rem; /* Increased from 0.75rem */
+}
+
+  .joining-date i {
+    color: #9ca3af;
+    font-size: 0.75rem; /* Increased from 0.7rem */
+  }
+
+.joining-text {
+  font-weight: 500;
+}
+
+.performance-badge {
+  padding: 5px 4px 5px 5px; /* Slightly increased */
+  border-radius: 4px; /* Increased from 3px */
+  font-size: 0.75rem; /* Increased from 0.7rem */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Increased from 4px */
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+  .performance-badge.good-performer {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+/* Details Grid - Slightly expanded */
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px; /* Increased gaps */
+  margin-bottom: 18px; /* Increased from 16px */
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px; /* Increased from 2px */
+}
+
+  .detail-item .label {
+    font-size: 0.75rem; /* Increased from 0.7rem */
+    color: #6b7280;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .detail-item .value {
+    font-size: 0.85rem; /* Increased from 0.8rem */
+    color: #1f2937;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+/* Section Divider */
+.section-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 18px 0; /* Increased from 16px */
+  opacity: 0.8;
+}
+
+/* Time Progress Section - Slightly expanded */
+.time-progress-section {
+  margin-bottom: 18px; /* Increased from 16px */
+}
+
+.time-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px; /* Increased from 12px */
+}
+
+  .time-header .status-badge {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 5px 9px; /* Increased padding */
+    border-radius: 12px;
+    font-size: 0.75rem; /* Increased from 0.7rem */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border: none;
+  }
+
+    .time-header .status-badge.active {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .time-header .status-badge.completed {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+/* Progress Timeline - Slightly expanded */
+.progress-timeline {
+  margin-bottom: 14px; /* Increased from 12px */
+}
+
+.time-labels-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px; /* Increased from 8px */
+}
+
+.time-point {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px; /* Increased from 2px */
+  min-width: 65px; /* Increased from 60px */
+}
+
+  .time-point.start {
+    align-items: flex-start;
+  }
+
+  .time-point.end {
+    align-items: flex-end;
+  }
+
+.time-value {
+  font-weight: 600;
+  font-size: 0.85rem; /* Increased from 0.8rem */
+  color: #1f2937;
+  line-height: 1.2;
+}
+
+  .time-value.active-hours {
+    color: #3b82f6;
+    font-size: 0.95rem; /* Increased from 0.9rem */
+    font-weight: 700;
+  }
+
+.time-description {
+  font-size: 0.7rem; /* Increased from 0.65rem */
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Progress Bar - Slightly larger */
+.progress-container {
+  margin: 0 0 10px 0; /* Increased from 8px */
+}
+
+.progress-bar {
+  height: 7px; /* Increased from 6px */
+  background: #e5e7eb;
+  border-radius: 3.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
+  border-radius: 3.5px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-indicator {
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px; /* Increased from 3px */
+  height: 14px; /* Increased from 12px */
+  background: #1f2937;
+  border-radius: 2px;
+}
+
+.time-markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.marker {
+  width: 1px;
+  height: 9px; /* Increased from 8px */
+  background: #d1d5db;
+  border-radius: 0.5px;
+}
+
+  .marker.start,
+  .marker.end {
+    background: #374151;
+  }
+
+/* Shift Info */
+.shift-info {
+  text-align: center;
+  margin-top: 7px; /* Increased from 6px */
+}
+
+.shift-text {
+  font-size: 0.8rem; /* Increased from 0.75rem */
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Summary - Slightly expanded */
+.time-summary {
+  display: flex;
+  gap: 14px; /* Increased from 12px */
+  margin-top: 14px; /* Increased from 12px */
+  padding: 14px; /* Increased from 12px */
+  background: #f9fafb;
+  border-radius: 7px; /* Increased from 6px */
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 9px; /* Increased from 8px */
+  flex: 1;
+}
+
+  .summary-item i {
+    color: #6b7280;
+    font-size: 0.95rem; /* Increased from 0.9rem */
+    width: 18px; /* Increased from 16px */
+    text-align: center;
+  }
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* Increased from 1px */
+}
+
+.summary-label {
+  font-size: 0.7rem; /* Increased from 0.65rem */
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.summary-value {
+  font-size: 0.85rem; /* Increased from 0.8rem */
+  font-weight: 600;
+  color: #1f2937;
+}
+
+  .summary-value.completed {
+    color: #10b981;
+  }
+
+/* Quick Actions - Slightly expanded */
+.quick-actions {
+  display: flex;
+  gap: 10px; /* Increased from 8px */
+  margin-top: 18px; /* Increased from 16px */
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px; /* Increased from 6px */
+  padding: 10px 14px; /* Increased padding */
+  border: 1px solid #d1d5db;
+  border-radius: 7px; /* Increased from 6px */
+  background: white;
+  color: #374151;
+  font-weight: 500;
+  font-size: 0.8rem; /* Increased from 0.75rem */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+  .action-btn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+  }
+
+  .action-btn i {
+    font-size: 0.85rem; /* Increased from 0.8rem */
+    transition: all 0.4s ease;
+  }
+
+  /* Updated Secure Vault Button */
+  .action-btn.secure-vault {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 3px 8px rgba(30, 41, 59, 0.3);
+    position: relative;
+    overflow: hidden;
+    justify-content: center; /* Changed from space-between to center */
+    padding: 10px 20px;
+  }
+
+    /* Button text - centered */
+    .action-btn.secure-vault span {
+      position: relative;
+      z-index: 2;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center; /* Added to ensure text is centered */
+    }
+
+    /* Key icon - always visible on left */
+    .action-btn.secure-vault .key-icon {
+      position: absolute;
+      left: 15px;
+      opacity: 1;
+      transform: translateX(0);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #fbbf24;
+    }
+
+    /* Lock icon - always visible on right */
+    .action-btn.secure-vault .lock-icon {
+      position: absolute;
+      right: 15px;
+      opacity: 1;
+      transform: translateX(0);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #e5e7eb;
+    }
+
+    /* Hover animations - icons move closer */
+    .action-btn.secure-vault:hover .key-icon {
+      left: 25px;
+      transform: translateX(10px) rotate(15deg);
+      color: #f59e0b;
+    }
+
+    .action-btn.secure-vault:hover .lock-icon {
+      right: 25px;
+      transform: translateX(-10px) rotate(-5deg);
+      color: #ffffff;
+    }
+
+    .action-btn.secure-vault:hover span {
+      opacity: 0.8;
+    }
+
+  /* Enhanced More Info Button with Animation */
+  .action-btn.more-info {
+    color: #1e293b;
+    border-color: #e2e8f0;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+    .action-btn.more-info:hover {
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      border-color: #94a3b8;
+      color: #0f172a;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(30, 41, 59, 0.1);
+    }
+
+    /* Info icon - always visible on left */
+    .action-btn.more-info .info-icon {
+      position: absolute;
+      left: 15px;
+      opacity: 1;
+      transform: translateX(0);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #3b82f6;
+    }
+
+    /* Button text */
+    .action-btn.more-info .info-text {
+      position: relative;
+      z-index: 2;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+    }
+
+    /* Arrow icon - always visible on right */
+    .action-btn.more-info .arrow-icon {
+      position: absolute;
+      right: 15px;
+      opacity: 1;
+      transform: translateX(0);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #6b7280;
+      font-size: 0.8rem;
+    }
+
+    /* Hover animations - icons move closer and change */
+    .action-btn.more-info:hover .info-icon {
+      left: 25px;
+      transform: translateX(10px) scale(1.1);
+      color: #2563eb;
+    }
+
+    .action-btn.more-info:hover .arrow-icon {
+      right: 25px;
+      transform: translateX(-10px) rotate(-90deg) scale(1.1);
+      color: #3b82f6;
+    }
+
+    .action-btn.more-info:hover .info-text {
+      opacity: 0.9;
+      transform: scale(0.98);
+    }
+
+    /* Add a subtle pulse effect on hover */
+    .action-btn.more-info:hover {
+      animation: infoPulse 1.5s ease-in-out infinite;
+    }
+
+@keyframes infoPulse {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.1);
+  }
+  50% {
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  }
+}
+
+/* Job Status Badge */
+.job-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 6px;
+  max-width: fit-content;
+}
+
+  .job-status-badge.probation {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fbbf24;
+  }
+
+  .job-status-badge.permanent {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+  }
+
+  .job-status-badge.contract {
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #3b82f6;
+  }
+
+  .job-status-badge i {
+    font-size: 0.65rem;
+  }
+
+/* Responsive Design */
+@media (max-width: 420px) {
+  .employee-profile-card {
+    margin: 2px;
+    padding: 14px; /* Slightly increased even on mobile */
+    max-width: none;
+    min-width: 100%;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 8px; /* Increased from 6px */
+  }
+
+  .time-point {
+    min-width: 55px; /* Increased from 50px */
+  }
+
+  .time-summary {
+    flex-direction: column;
+    gap: 10px; /* Increased from 8px */
+  }
+
+  /* Mobile adjustments for secure vault button */
+  .action-btn.secure-vault {
+    padding: 10px 15px;
+  }
+
+    .action-btn.secure-vault .key-icon {
+      left: 10px;
+    }
+
+    .action-btn.secure-vault .lock-icon {
+      right: 10px;
+    }
+
+    .action-btn.secure-vault:hover .key-icon {
+      left: 18px;
+    }
+
+    .action-btn.secure-vault:hover .lock-icon {
+      right: 18px;
+    }
+
+  /* Mobile adjustments for more info button */
+  .action-btn.more-info {
+    padding: 10px 15px;
+    text-align: center;
+  }
+
+  .action-btn.more-info .info-icon {
+    left: 10px;
+  }
+
+  .action-btn.more-info .arrow-icon {
+    right: 10px;
+  }
+
+  .action-btn.more-info:hover .info-icon {
+    left: 18px;
+  }
+
+  .action-btn.more-info:hover .arrow-icon {
+    right: 18px;
+  }
+}

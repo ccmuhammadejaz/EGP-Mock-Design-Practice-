@@ -1,0 +1,67 @@
+<div class="sidebar" [class.collapsed]="isCollapsed">
+  <!-- Overlay for mobile -->
+  <div class="sidebar-overlay"
+       [class.show]="!isCollapsed"
+       (click)="toggleSidebar()"
+       *ngIf="isMobile"></div>
+
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <button class="collapse-btn"
+              (click)="toggleSidebar()"
+              [attr.aria-label]="isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'">
+        <i class="fas" [class.fa-bars]="isCollapsed" [class.fa-times]="!isCollapsed"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <!-- Main Section -->
+      <div class="nav-section">
+        <h3 *ngIf="!isCollapsed" class="section-title">MAIN</h3>
+        <ul class="nav-list">
+          <li *ngFor="let item of mainNavItems"
+              [class.active]="item.active"
+              class="nav-item">
+            <a [routerLink]="item.route"
+               [attr.title]="isCollapsed ? item.label : ''"
+               class="nav-link">
+              <i class="nav-icon fas fa-{{item.icon}}"></i>
+              <span *ngIf="!isCollapsed" class="nav-label">{{item.label}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- HR & Finance Section -->
+      <div class="nav-section">
+        <h3 *ngIf="!isCollapsed" class="section-title">HR & FINANCE</h3>
+        <ul class="nav-list">
+          <li *ngFor="let item of hrNavItems" class="nav-item">
+            <a [routerLink]="item.route"
+               [attr.title]="isCollapsed ? item.label : ''"
+               class="nav-link">
+              <i class="nav-icon fas fa-{{item.icon}}"></i>
+              <span *ngIf="!isCollapsed" class="nav-label">{{item.label}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Services Section -->
+      <div class="nav-section">
+        <h3 *ngIf="!isCollapsed" class="section-title">SERVICES</h3>
+        <ul class="nav-list">
+          <li *ngFor="let item of servicesNavItems" class="nav-item">
+            <a [routerLink]="item.route"
+               [attr.title]="isCollapsed ? item.label : ''"
+               class="nav-link">
+              <i class="nav-icon fas fa-{{item.icon}}"></i>
+              <span *ngIf="!isCollapsed" class="nav-label">{{item.label}}</span>
+              <span class="nav-badge" *ngIf="item.badge && !isCollapsed">{{item.badge}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,210 @@
+<div class="performance-chart-card">
+  <!-- Card Header -->
+  <div class="card-header">
+    <div class="header-left">
+      <h3 class="card-title">Performance Pulse</h3>
+      <div class="view-tabs" *ngIf="showViewTabs">
+        <button class="view-tab"
+                [class.active]="activeView === 'Individual'"
+                (click)="setActiveView('Individual')">
+          Individual
+        </button>
+        <button class="view-tab"
+                [class.active]="activeView === 'Team'"
+                (click)="setActiveView('Team')">
+          Team
+        </button>
+        <button class="view-tab"
+                [class.active]="activeView === 'Dept'"
+                (click)="setActiveView('Dept')">
+          Dept
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Tabs -->
+  <div class="main-tabs">
+    <button class="main-tab"
+            [class.active]="activeTab === 'Performance'"
+            (click)="setActiveTab('Performance')">
+      Performance
+    </button>
+    <button class="main-tab"
+            [class.active]="activeTab === 'Disciplinary Status'"
+            (click)="setActiveTab('Disciplinary Status')">
+      Disciplinary Status
+    </button>
+  </div>
+
+  <!-- Performance Content -->
+  <div class="content-area" *ngIf="activeTab === 'Performance'">
+    <!-- Selected Factor Display -->
+    <div class="selected-factor-info">
+      <span class="factor-name" [style.color]="selectedFactor.color">{{ selectedFactor.label }}</span>
+      <div class="factor-values">
+        <span class="current-value">Current: {{ selectedFactor.value }}%</span>
+        <span class="mtd-value-display">MTD: {{ selectedFactor.mtdValue }}%</span>
+      </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="chart-section">
+      <!-- Chart Container -->
+      <div class="chart-container">
+        <!-- Y-Axis Labels -->
+        <div class="y-axis-labels">
+          <div class="y-label" *ngFor="let label of yAxisLabels">{{ label }}</div>
+        </div>
+
+        <!-- Chart Area -->
+        <div class="chart-area">
+          <svg class="chart-svg"
+               [attr.viewBox]="'0 0 ' + chartWidth + ' ' + chartHeight"
+               preserveAspectRatio="xMidYMid meet"
+               xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Grid Background -->
+            <defs>
+              <pattern id="chartGrid" width="75" height="28" patternUnits="userSpaceOnUse">
+                <path d="M 75 0 L 0 0 0 28" fill="none" stroke="#f3f4f6" stroke-width="1"></path>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#chartGrid)"></rect>
+
+            <!-- Single Selected Factor Line -->
+            <path [attr.d]="getSelectedFactorPath()"
+                  fill="none"
+                  [attr.stroke]="selectedFactor.color"
+                  stroke-width="2.5"
+                  stroke-dasharray="4,2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="selected-factor-line">
+            </path>
+
+            <!-- Data Points for selected factor -->
+            <g class="selected-data-points">
+              <circle *ngFor="let point of getSelectedFactorDataPoints()"
+                      [attr.cx]="point.x"
+                      [attr.cy]="point.y"
+                      r="4"
+                      [attr.fill]="selectedFactor.color"
+                      stroke="#ffffff"
+                      stroke-width="2"
+                      class="selected-data-dot"
+                      [attr.title]="selectedFactor.label + ' - ' + point.week + ': ' + point.value + '%'">
+              </circle>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- X-Axis Labels -->
+      <div class="x-axis-labels">
+        <span class="x-label" *ngFor="let label of weekLabels">{{ label }}</span>
+      </div>
+    </div>
+
+    <!-- Circular Progress Meters -->
+    <div class="progress-meters">
+      <div class="progress-meter"
+           *ngFor="let factor of performanceFactors; let i = index"
+           [class.selected]="factor.selected"
+           (click)="selectFactor(i)">
+
+        <!-- Circular Progress Ring -->
+        <div class="progress-ring">
+          <svg class="progress-svg" viewBox="0 0 100 100">
+            <!-- Background Circle -->
+            <circle cx="50" cy="50" r="42"
+                    fill="none"
+                    stroke="#e5e7eb"
+                    stroke-width="6">
+            </circle>
+            <!-- Progress Circle -->
+            <circle cx="50" cy="50" r="42"
+                    fill="none"
+                    [attr.stroke]="factor.selected ? factor.color : '#d1d5db'"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    [attr.stroke-dasharray]="263.89"
+                    [attr.stroke-dashoffset]="263.89 - (263.89 * factor.value / 100)"
+                    class="progress-circle">
+            </circle>
+          </svg>
+
+          <!-- Progress Value -->
+          <div class="progress-value" [style.color]="factor.selected ? factor.color : '#6b7280'">
+            {{ factor.value }}%
+          </div>
+        </div>
+
+        <!-- Factor Label -->
+        <div class="progress-label" [style.color]="factor.selected ? '#1f2937' : '#6b7280'">
+          {{ factor.label }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Disciplinary Status Content -->
+  <div class="content-area disciplinary-area" *ngIf="activeTab === 'Disciplinary Status'">
+    <div class="disciplinary-header">
+      <h4 class="disciplinary-title">Individual Disciplinary Status</h4>
+      <p class="disciplinary-subtitle">Personal performance metrics only</p>
+    </div>
+
+    <div class="disciplinary-metrics">
+      <div class="disciplinary-card">
+        <div class="count-display early">{{ disciplinaryData.earlyComings }}</div>
+        <div class="count-label">Early Comings</div>
+      </div>
+
+      <div class="disciplinary-card">
+        <div class="count-display late">{{ disciplinaryData.lateComings }}</div>
+        <div class="count-label">Late Comings</div>
+      </div>
+
+      <div class="disciplinary-card">
+        <div class="count-display supervisor" [class.present]="disciplinaryData.supervisorPresence">
+          {{ disciplinaryData.supervisorPresence ? 'Yes' : 'No' }}
+        </div>
+        <div class="count-label">Supervisor Presence</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Footer -->
+  <div class="summary-footer">
+    <div class="summary-stat">
+      <div class="stat-icon performance">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ overallPerformance }}%</div>
+        <div class="stat-label">Current Performance</div>
+      </div>
+    </div>
+
+    <div class="summary-stat" *ngIf="activeTab === 'Performance'">
+      <div class="stat-icon bonus" [style.background-color]="bonusColor">
+        <i class="fas fa-award"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value" [style.color]="bonusColor">{{ overallMtdPerformance }}%</div>
+        <div class="stat-label">MTD Avg (Bonus)</div>
+      </div>
+    </div>
+
+    <div class="summary-stat" *ngIf="activeTab === 'Disciplinary Status'">
+      <div class="stat-icon disciplinary" [style.background-color]="getDisciplinaryColor()">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value" [style.color]="getDisciplinaryColor()">{{ disciplinaryScore }}</div>
+        <div class="stat-label">Disciplinary Status</div>
+      </div>
+    </div>
+  </div>
+</div>

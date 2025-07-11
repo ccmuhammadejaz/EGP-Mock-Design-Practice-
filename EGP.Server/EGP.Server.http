@@ -1,0 +1,6 @@
+@EGP.Server_HostAddress = http://localhost:5152
+
+GET {{EGP.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

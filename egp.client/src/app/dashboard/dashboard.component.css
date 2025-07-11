@@ -1,0 +1,79 @@
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Increased to accommodate wider cards */
+  gap: 1px;
+  padding: 2px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.profile-section,
+.chart-section {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: fit-content;
+}
+
+/* Use :host instead of ::ng-deep for global styles */
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Secure Vault Button Styles */
+:host ::ng-deep .action-btn.secure-vault {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: gap 0.3s ease;
+}
+
+:host ::ng-deep .action-btn.secure-vault i {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .action-btn.secure-vault:hover {
+  gap: 4px;
+}
+
+:host ::ng-deep .action-btn.secure-vault:hover i {
+  transform: scale(1.1);
+}
+
+/* Responsive - even more compact */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 0px;
+    padding: 2px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr); /* Reduced to 2 columns for wider cards */
+    gap: 1px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr); /* Reduced to 3 columns for wider cards */
+    gap: 1px;
+  }
+}

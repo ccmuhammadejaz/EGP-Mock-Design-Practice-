@@ -1,0 +1,97 @@
+<header class="header">
+  <div class="header-content">
+    <!-- Left section with branding and sidebar trigger -->
+    <div class="header-left">
+      <!-- Sidebar trigger button -->
+      <button class="sidebar-trigger-btn" (click)="toggleSidebar()" title="Toggle Sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <div class="company-branding">
+        <img src="assets/images/header_icon.png" alt="MTBC" class="company-logo">
+        <h1 class="company-name" *ngIf="!isMobile">MTBC Portal</h1>
+      </div>
+    </div>
+
+    <!-- Center section with search -->
+    <div class="header-center" *ngIf="!isMobile">
+      <div class="search-container">
+        <div class="search-box">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text"
+                 placeholder="Search..."
+                 #searchInput
+                 (keyup.enter)="onSearch(searchInput.value)"
+                 (input)="searchTerm = searchInput.value"
+                 class="search-input">
+        </div>
+      </div>
+    </div>
+
+    <!-- Right section with actions -->
+    <div class="header-right">
+      <!-- Compact action buttons -->
+      <div class="header-actions">
+        <button class="action-btn" (click)="onAdd()" title="Add">
+          <i class="fas fa-plus"></i>
+        </button>
+
+        <button class="action-btn" (click)="onNotifications()" title="Notifications">
+          <i class="fas fa-bell"></i>
+          <span class="notification-dot" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+        </button>
+
+        <button class="action-btn"
+                (click)="toggleDarkMode()"
+                [title]="isDarkMode ? 'Light Mode' : 'Dark Mode'">
+          <i class="fas" [class.fa-moon]="!isDarkMode" [class.fa-sun]="isDarkMode"></i>
+        </button>
+
+        <!-- Compact user profile -->
+        <div class="user-profile-compact" (click)="toggleUserDropdown()">
+          <div class="avatar-container">
+            <img [src]="currentUser.avatar"
+                 [alt]="currentUser.name"
+                 class="user-avatar"
+                 (error)="onImageError($event)"
+                 #userImg>
+            <div class="user-initials"
+                 [style.display]="imageLoadError ? 'flex' : 'none'">
+              {{ getUserInitials() }}
+            </div>
+          </div>
+          <i class="fas fa-chevron-down dropdown-icon" [class.rotated]="showUserDropdown"></i>
+
+          <!-- Compact dropdown -->
+          <div class="user-dropdown compact" [class.show]="showUserDropdown">
+            <div class="dropdown-header">
+              <div class="dropdown-user-info">
+                <div class="dropdown-name">{{ currentUser.name }}</div>
+                <div class="dropdown-email" *ngIf="currentUser.email">{{ currentUser.email }}</div>
+              </div>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <a href="#" class="dropdown-item" (click)="onProfileClick(); $event.preventDefault()">
+              <i class="fas fa-user"></i>Profile
+            </a>
+            <a href="#" class="dropdown-item" (click)="onSettingsClick(); $event.preventDefault()">
+              <i class="fas fa-cog"></i>Settings
+            </a>
+            <a href="#" class="dropdown-item" (click)="onNotifications(); $event.preventDefault()">
+              <i class="fas fa-bell"></i>Notifications
+              <span class="notification-badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a href="#" class="dropdown-item logout" (click)="onLogout(); $event.preventDefault()">
+              <i class="fas fa-sign-out-alt"></i>Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

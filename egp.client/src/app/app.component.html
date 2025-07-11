@@ -1,0 +1,14 @@
+<div class="app-container">
+  <app-sidebar (sidebarToggled)="onSidebarToggle($event)"></app-sidebar>
+  <div class="app-main" [class.sidebar-collapsed]="isSidebarCollapsed">
+    <app-header [sidebarCollapsed]="isSidebarCollapsed"></app-header>
+    <main class="main-content">
+      <div class="dashboard-grid">
+        <!-- Remove the direct component usage -->
+        <div class="router-section">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

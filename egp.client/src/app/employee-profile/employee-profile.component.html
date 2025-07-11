@@ -1,0 +1,165 @@
+<div class="employee-profile-card">
+  <!-- Header Section -->
+  <div class="profile-header">
+    <div class="employee-info">
+      <div class="avatar-container">
+        <!-- Use a placeholder if image doesn't exist -->
+        <div class="employee-avatar placeholder-avatar" *ngIf="!employee.avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <img [src]="employee.avatar"
+             [alt]="employee.name"
+             class="employee-avatar"
+             *ngIf="employee.avatar"
+             (error)="onAvatarError()">
+        <div class="status-badge" [class]="employee.employmentStatus.toLowerCase()">
+          <i class="fas fa-check"></i>
+        </div>
+      </div>
+
+      <div class="basic-info">
+        <h2 class="employee-name">{{ employee.name }}</h2>
+        <p class="job-title">{{ employee.jobTitle }}</p>
+        <div class="joining-date">
+          <i class="fas fa-calendar-alt"></i>
+          <span class="joining-text">Joined {{ employee.joiningDate }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="performance-section">
+      <div class="performance-badge" [class]="getPerformanceClass()">
+        <i class="fas fa-trophy"></i>
+        {{ employee.performanceStatus }}
+      </div>
+
+      <!-- Job Status Badge positioned below performance badge within header -->
+      <div class="job-status-badge" [class]="employee.employmentStatus.toLowerCase()">
+        <i class="fas fa-briefcase"></i>
+        <span>{{ employee.employmentStatus | titlecase }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Employee Details Grid -->
+  <div class="details-grid">
+    <div class="detail-item">
+      <span class="label">Employee ID</span>
+      <span class="value">{{ employee.id }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Tenure</span>
+      <span class="value">{{ employee.tenure }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Insurance Group</span>
+      <span class="value">{{ employee.insuranceGroup }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Department</span>
+      <span class="value">{{ employee.department }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Location</span>
+      <span class="value">{{ employee.location }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Phone Number</span>
+      <span class="value">{{ employee.phoneNumber }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Emergency Contact</span>
+      <span class="value">{{ employee.emergencyContact }}</span>
+    </div>
+  </div>
+
+  <!-- Divider Line -->
+  <div class="section-divider"></div>
+
+  <!-- Time Progress Bar Section -->
+  <div class="time-progress-section">
+    <!-- Progress Timeline -->
+    <div class="progress-timeline">
+      <!-- Time Labels Above Progress Bar -->
+      <div class="time-labels-top">
+        <div class="time-point start">
+          <span class="time-value">{{ checkInTime }}</span>
+          <span class="time-description">Check-In</span>
+        </div>
+
+        <div class="time-point center">
+          <span class="time-value active-hours">{{ activeTime }}</span>
+          <span class="time-description">Active Time</span>
+        </div>
+
+        <div class="time-point end">
+          <span class="time-value">{{ checkOutTime }}</span>
+          <span class="time-description">Check-Out</span>
+        </div>
+      </div>
+
+      <!-- Progress Bar Container -->
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width.%]="progressPercentage">
+            <div class="progress-indicator"></div>
+          </div>
+          <div class="time-markers">
+            <div class="marker start" title="Check-in"></div>
+            <div class="marker quarter"></div>
+            <div class="marker half"></div>
+            <div class="marker three-quarter"></div>
+            <div class="marker end" title="Check-out"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shift Information Below -->
+      <div class="shift-info">
+        <span class="shift-text">Shift Time: {{ totalShiftTime }}</span>
+      </div>
+    </div>
+
+    <!-- Summary Info -->
+    <div class="time-summary">
+      <div class="summary-item">
+        <i class="fas fa-clock"></i>
+        <div class="summary-content">
+          <span class="summary-label">Total Hours</span>
+          <span class="summary-value">{{ timeEntry.totalHours }}</span>
+        </div>
+      </div>
+      <div class="summary-item">
+        <i class="fas fa-hourglass-half"></i>
+        <div class="summary-content">
+          <span class="summary-label">Status</span>
+          <span class="summary-value" *ngIf="!timeEntry.checkOut">
+            {{ progressPercentage < 100 ? ((100 - progressPercentage) * 9 / 100).toFixed(1) + 'h remaining' : 'Overtime' }}
+          </span>
+          <span class="summary-value completed" *ngIf="timeEntry.checkOut">Shift Completed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <button class="action-btn secure-vault" (click)="openSecureVault()">
+      <i class="fas fa-key key-icon"></i>
+      <span>Secure Vault</span>
+      <i class="fas fa-vault lock-icon"></i>
+    </button>
+
+    <button class="action-btn more-info" (click)="showMoreInfo()">
+      <i class="fas fa-info-circle info-icon"></i>
+      <span class="info-text">More Info</span>
+      <i class="fas fa-arrow-right arrow-icon"></i>
+    </button>
+  </div>
+</div>

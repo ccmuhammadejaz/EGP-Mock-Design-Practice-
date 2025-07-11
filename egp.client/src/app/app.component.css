@@ -1,0 +1,113 @@
+:host {
+  max-width: 1280px;
+  padding: 2rem;
+  text-align: center;
+}
+
+th, td {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+table {
+  margin: 0 auto;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100vw; /* Always full width */
+  margin-left: 0; /* No margin offset */
+  height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  background: #f8fafc;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: calc(100vh - 50px);
+  position: relative;
+  top: 50px; /* Account for fixed header */
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2px;
+  padding: 4px;
+  margin: 0;
+  width: 100%;
+  min-height: calc(100vh - 52px);
+  box-sizing: border-box;
+}
+
+.profile-section,
+.chart-section,
+.router-section {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Add floating sidebar trigger area */
+.sidebar-trigger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 100vh;
+  z-index: 1002;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-content {
+    top: 48px;
+    height: calc(100vh - 48px);
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1px;
+    padding: 2px;
+    min-height: calc(100vh - 49px);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    padding: 4px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    padding: 4px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    padding: 4px;
+  }
+}
